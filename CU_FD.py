@@ -33,7 +33,7 @@ def cal(a,b) :
 #ดึงข้อมูลจาก Excel
 Spec = pd.read_excel("./Spec2.xlsx")
 Spec = pd.DataFrame.as_matrix(Spec).astype(str)
-Self = pd.read_excel("C:/Users/James/Desktop/Programming/CU_FD/Self2.xlsx")
+Self = pd.read_excel("./Self2.xlsx")
 Self = pd.DataFrame.as_matrix(Self).astype(str)
 Self = np.delete(Self,2,1) #ลบปีเกิดออก
 
