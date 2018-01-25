@@ -11,8 +11,8 @@ import pandas as pd
 def cal(a,b) :
     try :
         score = 0
-        for n in range(len(a)) :
-            if(n == 0 and a[n] == b[n]) : return 0 #คนเดียวกัน
+        for n in range(1,len(a)) :
+            #if(n == 0 and a[n] == b[n]) : return 0 #คนเดียวกัน
             if(n == 1 and a[n] != b[n]) : return 0 #เพศที่ต้องการไม่ตรงกัน
             if(n == 2) :
                 age = [int(e.strip()) for e in a[n].strip().split("-")]
