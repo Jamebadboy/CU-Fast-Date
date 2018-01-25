@@ -1,3 +1,4 @@
+#!python3
 # -*- coding: utf-8 -*-
 """
 Created on Thu Jan 25 12:50:03 2018
@@ -30,14 +31,21 @@ def cal(a,b) :
         return score
     except : return "ERROR"
 
+input_spec = input("Spec File name : ")
+input_self = input("Self Information File name : ")
+input_match = input("File name to Export : ")
+
 #ดึงข้อมูลจาก Excel
-Spec = pd.read_excel("./Spec2.xlsx")
+print("Importing data from "+input_spec+".xlsx ...")
+Spec = pd.read_excel("./"+input_spec+".xlsx")
 Spec = pd.DataFrame.as_matrix(Spec).astype(str)
-Self = pd.read_excel("./Self2.xlsx")
+print("Importing data from "+input_self+".xlsx ...")
+Self = pd.read_excel("./"+input_self+".xlsx")
 Self = pd.DataFrame.as_matrix(Self).astype(str)
 Self = np.delete(Self,2,1) #ลบปีเกิดออก
 
 #ใส่ชื่อใน DataFrame
+print("Matching...")
 Matching = pd.DataFrame(np.zeros((len(Self)+1,len(Self)+1), dtype = str))
 for x in range(len(Self)) :
     Matching[0][x+1] = Self[x][0]
@@ -51,7 +59,7 @@ for i in range(len(Self)) :
         Matching[j+1][i+1] += str(cal(Spec[j].tolist(),Self[i].tolist()))
 
 #Export DataFrame เป็น Excel
-test = pd.DataFrame(Matching)
-writer = pd.ExcelWriter("Matching2.xlsx", engine = "xlsxwriter")
-test.to_excel(writer, header=None, index=None)    
+print("Exporting Data to "+input_match+".xlsx ...")
+writer = pd.ExcelWriter(input_match+".xlsx", engine = "xlsxwriter")
+Matching.to_excel(writer, header=None, index=None)    
 writer.save()
